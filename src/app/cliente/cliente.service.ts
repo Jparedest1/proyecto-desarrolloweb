@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ClientService {
-  private apiUrl = '/api/Cliente';
+  private apiUrl = 'https://ventasdb.onrender.com/api/Cliente';
 
   constructor() { }
 

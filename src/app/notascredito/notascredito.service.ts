@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class VentaService {
-  private apiUrl = '/api/Ventas'; // Ruta base de la API para ventas
+  private apiUrl = 'https://ventasdb.onrender.com/api/Ventas'; // Ruta base de la API para ventas
 
   constructor() { }
 
