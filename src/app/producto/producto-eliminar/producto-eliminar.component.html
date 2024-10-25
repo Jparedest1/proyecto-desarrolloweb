@@ -1,0 +1,74 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">Eliminar Producto</h2>
+      <li class="mb-0 list-unstyled">
+        <a href="#" class="text-decoration-none text-dark">
+          <i class="bi bi-house me-2"></i> Home
+        </a>
+      </li>
+  </div>
+  
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status"></div>
+    <p>Cargando...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <div class="input-group">
+        <input type="number" class="form-control" placeholder="Buscar por ID" [(ngModel)]="searchId">
+        <button class="btn btn-outline-secondary" type="button" (click)="searchProductos()">Buscar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Lista de Productos</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Precio Unitario</th>
+            <th>ID Proveedor</th>
+            <th>Fecha de Vencimiento</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of filteredProductos">
+            <td>{{ producto.idProducto }}</td>
+            <td>{{ producto.descripcion }}</td>
+            <td>{{ producto.precioUnitario | currency }}</td>
+            <td>{{ producto.idProveedor }}</td>
+            <td>{{ producto.fechaVencimiento | date }}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="selectProducto(producto)">Seleccionar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <h3>Eliminar Producto</h3>
+      <div *ngIf="selectedProducto" class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ selectedProducto.descripcion }}</h5>
+          <p class="card-text">ID: {{ selectedProducto.idProducto }}</p>
+          <p class="card-text">ID Proveedor: {{ selectedProducto.idProveedor }}</p>
+          <p class="card-text">Precio Unitario: {{ selectedProducto.precioUnitario | currency }}</p>
+          <p class="card-text">Ubicación: {{ selectedProducto.ubicacionFisica }}</p>
+          <p class="card-text">Existencia Mínima: {{ selectedProducto.existenciaMinima }}</p>
+          <button class="btn btn-danger" (click)="deleteProducto()">Eliminar Producto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="deleteMessage" class="alert alert-success mt-3">
+    {{ deleteMessage }}
+  </div>
+</div>

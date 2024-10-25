@@ -1,0 +1,77 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white d-flex justify-content-between align-items-start">
+            <h2 class="mb-0">Crear Nuevo Proveedor</h2>
+            
+            <li class="mb-0 list-unstyled">
+              <a href="#" class="text-decoration-none text-light" (click)="irAPagina($event, '/producto/crear')">
+                <i class="bi bi-basket-fill me-2"></i>Crear Producto
+              </a>
+            </li>            
+            
+            <li class="mb-0 list-unstyled">
+              <a href="#" class="text-decoration-none text-light">
+                <i class="bi bi-house me-2"></i> Home
+              </a>
+            </li>
+          </div>
+
+
+
+
+          <div class="card-body">
+            <form [formGroup]="proveedorForm" (ngSubmit)="onSubmit()" class="needs-validation">
+  
+              <div class="mb-3">
+                <label for="idProveedor" class="form-label">ID Proveedor</label>
+                <input type="number" class="form-control" id="idProveedor" formControlName="idProveedor" required>
+                <div class="invalid-feedback" *ngIf="proveedorForm.get('idProveedor')?.invalid && (proveedorForm.get('idProveedor')?.dirty || proveedorForm.get('idProveedor')?.touched)">
+                  ID es requerido.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="nombreProveedor" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombreProveedor" formControlName="nombreProveedor" required>
+                <div class="invalid-feedback" *ngIf="proveedorForm.get('nombreProveedor')?.invalid && (proveedorForm.get('nombreProveedor')?.dirty || proveedorForm.get('nombreProveedor')?.touched)">
+                  Nombre es requerido.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="direccionProveedor" class="form-label">Direccion</label>
+                <input type="text" class="form-control" id="direccionProveedor" formControlName="direccionProveedor" required>
+                <div class="invalid-feedback" *ngIf="proveedorForm.get('direccionProveedor')?.invalid && (proveedorForm.get('direccionProveedor')?.dirty || proveedorForm.get('direccionProveedor')?.touched)">
+                  Dirección es requerida.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="contactoProveedor" class="form-label">Contacto</label>
+                <input type="text" class="form-control" id="contactoProveedor" formControlName="contactoProveedor" required>
+                <div class="invalid-feedback" *ngIf="proveedorForm.get('contactoProveedor')?.invalid && (proveedorForm.get('contactoProveedor')?.dirty || proveedorForm.get('contactoProveedor')?.touched)">
+                  Contacto es requerido.
+                </div>
+              </div>
+  
+              <button type="submit" class="btn btn-primary" [disabled]="!proveedorForm.valid || isLoading">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Crear Proveedor
+              </button>
+            </form>
+  
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+              {{ errorMessage }}
+            </div>
+  
+            <div *ngIf="successMessage" class="alert alert-success mt-3">
+              {{ successMessage }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

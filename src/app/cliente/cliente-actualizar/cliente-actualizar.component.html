@@ -1,0 +1,87 @@
+<div class="container mt-5">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Actualizar Cliente</h2>
+        <li class="mb-0 list-unstyled">
+          <a href="#" class="text-decoration-none text-dark">
+            <i class="bi bi-house me-2"></i> Home
+          </a>
+        </li>
+    </div>
+
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border" role="status"></div>
+      <p>Cargando...</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <div class="input-group">
+          <input type="number" class="form-control" placeholder="Buscar por ID" [(ngModel)]="searchId">
+          <button class="btn btn-outline-secondary" type="button" (click)="searchClients()">Buscar</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Lista de Clientes</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let client of filteredClients">
+              <td>{{ client.idCliente }}</td>
+              <td>{{ client.nombresCliente }}</td>
+              <td>{{ client.apellidosCliente }}</td>
+              <td>
+                <button class="btn btn-primary btn-sm" (click)="selectClient(client)">Seleccionar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <h3>Actualizar Cliente</h3>
+        <form *ngIf="selectedClient" (ngSubmit)="updateClient()">
+          <div class="mb-3">
+            <label for="nombresCliente" class="form-label">Nombres</label>
+            <input type="text" class="form-control" id="nombresCliente" [(ngModel)]="selectedClient.nombresCliente" name="nombresCliente" required>
+          </div>
+          <div class="mb-3">
+            <label for="apellidosCliente" class="form-label">Apellidos</label>
+            <input type="text" class="form-control" id="apellidosCliente" [(ngModel)]="selectedClient.apellidosCliente" name="apellidosCliente" required>
+          </div>
+          <div class="mb-3">
+            <label for="nit" class="form-label">NIT</label>
+            <input type="text" class="form-control" id="nit" [(ngModel)]="selectedClient.nit" name="nit" required>
+          </div>
+          <div class="mb-3">
+            <label for="direccionCliente" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccionCliente" [(ngModel)]="selectedClient.direccionCliente" name="direccionCliente" required>
+          </div>
+          <div class="mb-3">
+            <label for="categoriaCliente" class="form-label">Categoría</label>
+            <input type="text" class="form-control" id="categoriaCliente" [(ngModel)]="selectedClient.categoriaCliente" name="categoriaCliente" required>
+          </div>
+          <div class="mb-3">
+            <label for="estadoCliente" class="form-label">Estado</label>
+            <input type="text" class="form-control" id="estadoCliente" [(ngModel)]="selectedClient.estadoCliente" name="estadoCliente" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Actualizar Cliente</button>
+        </form>
+      </div>
+    </div>
+  
+    <div *ngIf="updateMessage" class="alert alert-success mt-3">
+      {{ updateMessage }}
+    </div>
+  </div>

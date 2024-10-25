@@ -1,0 +1,70 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Eliminar Cliente</h2>
+        <li class="mb-0 list-unstyled">
+          <a href="#" class="text-decoration-none text-dark">
+            <i class="bi bi-house me-2"></i> Home
+          </a>
+        </li>
+    </div>
+    
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border" role="status"></div>
+      <p>Cargando...</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <div class="input-group">
+          <input type="number" class="form-control" placeholder="Buscar por ID" [(ngModel)]="searchId">
+          <button class="btn btn-outline-secondary" type="button" (click)="searchClients()">Buscar</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Lista de Clientes</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let client of filteredClients">
+              <td>{{ client.idCliente }}</td>
+              <td>{{ client.nombresCliente }}</td>
+              <td>{{ client.apellidosCliente }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm" (click)="selectClient(client)">Seleccionar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <h3>Eliminar Cliente</h3>
+        <div *ngIf="selectedClient" class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ selectedClient.nombresCliente }} {{ selectedClient.apellidosCliente }}</h5>
+            <p class="card-text">ID: {{ selectedClient.idCliente }}</p>
+            <p class="card-text">NIT: {{ selectedClient.nit }}</p>
+            <p class="card-text">Dirección: {{ selectedClient.direccionCliente }}</p>
+            <p class="card-text">Categoría: {{ selectedClient.categoriaCliente }}</p>
+            <p class="card-text">Estado: {{ selectedClient.estadoCliente }}</p>
+            <button class="btn btn-danger" (click)="deleteClient()">Eliminar Cliente</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="deleteMessage" class="alert alert-success mt-3">
+      {{ deleteMessage }}
+    </div>
+  </div>

@@ -1,0 +1,70 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Eliminar Proveedor</h2>
+        <li class="mb-0 list-unstyled">
+          <a href="#" class="text-decoration-none text-dark">
+            <i class="bi bi-house me-2"></i> Home
+          </a>
+        </li>
+    </div>
+    
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border" role="status"></div>
+      <p>Cargando...</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <div class="input-group">
+          <input type="number" class="form-control" placeholder="Buscar por ID" [(ngModel)]="searchId">
+          <button class="btn btn-outline-secondary" type="button" (click)="searchProveedores()">Buscar</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Lista de Proveedores</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Contacto</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let proveedor of filteredProveedores">
+              <td>{{ proveedor.idProveedor }}</td>
+              <td>{{ proveedor.nombreProveedor }}</td>
+              <td>{{ proveedor.direccionProveedor }}</td>
+              <td>{{ proveedor.contactoProveedor }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm" (click)="selectProveedor(proveedor)">Seleccionar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <h3>Eliminar Proveedor</h3>
+        <div *ngIf="selectedProveedor" class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ selectedProveedor.nombreProveedor }}</h5>
+            <p class="card-text">ID: {{ selectedProveedor.idProveedor }}</p>
+            <p class="card-text">Dirección: {{ selectedProveedor.direccionProveedor }}</p>
+            <p class="card-text">Contacto: {{ selectedProveedor.contactoProveedor }}</p>
+            <button class="btn btn-danger" (click)="deleteProveedor()">Eliminar Proveedor</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="deleteMessage" class="alert alert-success mt-3">
+      {{ deleteMessage }}
+    </div>
+</div>

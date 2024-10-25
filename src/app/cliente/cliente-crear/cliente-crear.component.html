@@ -1,0 +1,97 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white d-flex justify-content-between align-items-start">
+            <h2 class="mb-0">Crear Nuevo Cliente</h2>
+            <li class="mb-0 list-unstyled">
+              <a href="#" class="text-decoration-none text-light">
+                <i class="bi bi-house me-2"></i> Home
+              </a>
+            </li>
+          </div>          
+          <div class="card-body">
+            <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="needs-validation">
+              <div class="mb-3">
+                <label for="idCliente" class="form-label">ID Cliente</label>
+                <input type="number" class="form-control" id="idCliente" formControlName="idCliente" required>
+                <div class="invalid-feedback" *ngIf="clientForm.get('idCliente')?.invalid && (clientForm.get('idCliente')?.dirty || clientForm.get('idCliente')?.touched)">
+                  ID es requerido.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="nombresCliente" class="form-label">Nombres</label>
+                <input type="text" class="form-control" id="nombresCliente" formControlName="nombresCliente" required>
+                <div class="invalid-feedback" *ngIf="clientForm.get('nombresCliente')?.invalid && (clientForm.get('nombresCliente')?.dirty || clientForm.get('nombresCliente')?.touched)">
+                  Nombre es requerido.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="apellidosCliente" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" id="apellidosCliente" formControlName="apellidosCliente" required>
+                <div class="invalid-feedback" *ngIf="clientForm.get('apellidosCliente')?.invalid && (clientForm.get('apellidosCliente')?.dirty || clientForm.get('apellidosCliente')?.touched)">
+                  Apellido es requerido.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="nit" class="form-label">NIT</label>
+                <input type="text" class="form-control" id="nit" formControlName="nit" required>
+                <div class="invalid-feedback" *ngIf="clientForm.get('nit')?.invalid && (clientForm.get('nit')?.dirty || clientForm.get('nit')?.touched)">
+                  NIT es requerido.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="direccionCliente" class="form-label">Direccion</label>
+                <input type="text" class="form-control" id="direccionCliente" formControlName="direccionCliente" required>
+                <div class="invalid-feedback" *ngIf="clientForm.get('direccionCliente')?.invalid && (clientForm.get('direccionCliente')?.dirty || clientForm.get('direccionCliente')?.touched)">
+                  Direccion es requerida.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="categoriaCliente" class="form-label">Categoria</label>
+                <select class="form-select" id="categoriaCliente" formControlName="categoriaCliente" required>
+                  <option value="">Selecciona una cateroria</option>
+                  <option value="Mayorista">Mayorista</option>
+                  <option value="Minorista">Minorista</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="clientForm.get('categoriaCliente')?.invalid && (clientForm.get('categoriaCliente')?.dirty || clientForm.get('categoriaCliente')?.touched)">
+                  Categoria es requerida.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="estadoCliente" class="form-label">Estado</label>
+                <select class="form-select" id="estadoCliente" formControlName="estadoCliente" required>
+                  <option value="">Seleccionar estado</option>
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+                  <option value="Pendiente">Pendiente</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="clientForm.get('estadoCliente')?.invalid && (clientForm.get('estadoCliente')?.dirty || clientForm.get('estadoCliente')?.touched)">
+                  Estado es requerido.
+                </div>
+              </div>
+  
+              <button type="submit" class="btn btn-primary" [disabled]="!clientForm.valid || isLoading">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Crear Cliente
+              </button>
+            </form>
+  
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+              {{ errorMessage }}
+            </div>
+  
+            <div *ngIf="successMessage" class="alert alert-success mt-3">
+              {{ successMessage }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

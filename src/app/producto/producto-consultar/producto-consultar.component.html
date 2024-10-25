@@ -1,0 +1,59 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Lista de Productos</h2>
+    <li class="mb-0 list-unstyled">
+      <a href="#" class="text-decoration-none text-dark">
+        <i class="bi bi-house me-2"></i> Home
+      </a>
+    </li>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <input type="number" class="form-control" placeholder="Buscar por ID" [(ngModel)]="searchId">
+    </div>
+    <div class="col-md-4">
+      <input type="text" class="form-control" placeholder="Buscar por Descripción" [(ngModel)]="searchDescription">
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-primary" (click)="searchProveedores()">Buscar</button>
+      <button class="btn btn-secondary ms-2" (click)="clearSearch()">Limpiar</button>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status"></div>
+    <p>Loading...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <table *ngIf="filteredProductos.length > 0" class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Proveedor</th>
+        <th>Precio Unitario</th>
+        <th>Fecha de Vencimiento</th>
+        <th>Ubicación Física</th>
+        <th>Existencia Mínima</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of filteredProductos">
+        <td>{{ producto.idProducto }}</td>
+        <td>{{ producto.descripcion }}</td>
+        <td>{{ producto.idProveedor }}</td>
+        <td>{{ producto.precioUnitario | currency }}</td>
+        <td>{{ producto.fechaVencimiento | date:'yyyy-MM-dd' }}</td>
+        <td>{{ producto.ubicacionFisica }}</td>
+        <td>{{ producto.existenciaMinima }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="filteredProductos.length === 0 && !isLoading" class="alert alert-info">
+    No se encontraron productos.
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">Actualizar Proveedor</h2>
+      <li class="mb-0 list-unstyled">
+        <a href="#" class="text-decoration-none text-dark">
+          <i class="bi bi-house me-2"></i> Home
+        </a>
+      </li>
+    </div>
+  
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border" role="status"></div>
+      <p>Cargando...</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <div class="input-group">
+          <input type="number" class="form-control" placeholder="Buscar por ID" [(ngModel)]="searchId">
+          <button class="btn btn-outline-secondary" type="button" (click)="searchProveedores()">Buscar</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Lista de Proveedores</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Contacto</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let proveedor of filteredProveedores">
+              <td>{{ proveedor.idProveedor }}</td>
+              <td>{{ proveedor.nombreProveedor }}</td>
+              <td>{{ proveedor.direccionProveedor }}</td>
+              <td>{{ proveedor.contactoProveedor }}</td>
+              <td>
+                <button class="btn btn-primary btn-sm" (click)="selectProveedor(proveedor)">Seleccionar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="col-md-6">
+        <h3>Actualizar Proveedor</h3>
+        <form *ngIf="selectedProveedor" (ngSubmit)="updateProveedor()">
+          <div class="mb-3">
+            <label for="nombreProveedor" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombreProveedor" [(ngModel)]="selectedProveedor.nombreProveedor" name="nombreProveedor" required>
+          </div>
+          <div class="mb-3">
+            <label for="direccionProveedor" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccionProveedor" [(ngModel)]="selectedProveedor.direccionProveedor" name="direccionProveedor" required>
+          </div>
+          <div class="mb-3">
+            <label for="contactoProveedor" class="form-label">Contacto</label>
+            <input type="text" class="form-control" id="contactoProveedor" [(ngModel)]="selectedProveedor.contactoProveedor" name="contactoProveedor" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Actualizar Proveedor</button>
+        </form>
+      </div>
+    </div>
+  
+    <div *ngIf="updateMessage" class="alert alert-success mt-3">
+      {{ updateMessage }}
+    </div>
+  </div>
+  

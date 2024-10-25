@@ -1,0 +1,78 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">Anular Venta</h2>
+      <li class="mb-0 list-unstyled">
+        <a href="#" class="text-decoration-none text-dark">
+          <i class="bi bi-house me-2"></i> Home
+        </a>
+      </li>
+  </div>
+  
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status"></div>
+    <p>Cargando...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <div class="input-group">
+        <input type="number" class="form-control" placeholder="Buscar por ID" [(ngModel)]="searchId">
+        <button class="btn btn-outline-secondary" type="button" (click)="searchVentas()">Buscar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Lista de Ventas</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Forma de Pago</th>
+            <th>Total Venta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ventas of filteredVentas">
+            <td>{{ ventas.idVenta }}</td>
+            <td>{{ ventas.idCliente }}</td>
+            <td>{{ ventas.idProducto }}</td>
+            <td>{{ ventas.fechaVenta | date }}</td>
+            <td>{{ ventas.tipoVenta }}</td>
+            <td>{{ ventas.formaPago }}</td>
+            <td>{{ ventas.totalVenta }}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="selectVenta(ventas)">Seleccionar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="selectedVentas" class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ selectedVentas.idVenta }}</h5>
+          <p class="card-text">ID Venta: {{ selectedVentas.idVenta }}</p>
+          <p class="card-text">Fecha Venta: {{ selectedVentas.fechaVenta | date }}</p>
+          <p class="card-text">ID Cliente: {{ selectedVentas.idCliente }}</p>
+          <p class="card-text">ID Producto: {{ selectedVentas.idProducto }}</p>          
+          <p class="card-text">Tipo Venta: {{ selectedVentas.tipoVenta }}</p>
+          <p class="card-text">Forma de Pago: {{ selectedVentas.formaPago }}</p>
+          <p class="card-text">Total Venta: {{ selectedVentas.totalVenta }}</p>
+          <button class="btn btn-danger" (click)="deleteVenta()">Anular Venta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="deleteMessage" class="alert alert-success mt-3">
+    {{ deleteMessage }}
+  </div>
+</div>

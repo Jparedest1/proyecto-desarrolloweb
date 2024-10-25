@@ -1,0 +1,89 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Actualizar Producto</h2>
+    <li class="mb-0 list-unstyled">
+      <a href="#" class="text-decoration-none text-dark">
+        <i class="bi bi-house me-2"></i> Home
+      </a>
+    </li>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status"></div>
+    <p>Cargando...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <div class="input-group">
+        <input type="number" class="form-control" placeholder="Buscar por ID" [(ngModel)]="searchId">
+        <button class="btn btn-outline-secondary" type="button" (click)="searchProductos()">Buscar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Lista de Productos</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Proveedor</th>
+            <th>Ubicación</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of filteredProductos">
+            <td>{{ producto.idProducto }}</td>
+            <td>{{ producto.descripcion }}</td>
+            <td>{{ producto.idProveedor }}</td>
+            <td>{{ producto.ubicacionFisica }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm" (click)="selectProducto(producto)">Seleccionar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Actualizar Producto</h3>
+      <form *ngIf="selectedProducto" (ngSubmit)="updateProducto()">
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <input type="text" class="form-control" id="descripcion" [(ngModel)]="selectedProducto.descripcion" name="descripcion" required>
+        </div>
+        <div class="mb-3">
+          <label for="precioUnitario" class="form-label">Precio Unitario</label>
+          <input type="number" class="form-control" id="precioUnitario" [(ngModel)]="selectedProducto.precioUnitario" name="precioUnitario" required>
+        </div>
+        <div class="mb-3">
+          <label for="idProveedor" class="form-label">ID Proveedor</label>
+          <input type="number" class="form-control" id="idProveedor" [(ngModel)]="selectedProducto.idProveedor" name="idProveedor" required>
+        </div>
+        <div class="mb-3">
+          <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento</label>
+          <input type="date" class="form-control" id="fechaVencimiento" [(ngModel)]="selectedProducto.fechaVencimiento" name="fechaVencimiento" required>
+        </div>
+        <div class="mb-3">
+          <label for="ubicacionFisica" class="form-label">Ubicación Física</label>
+          <input type="text" class="form-control" id="ubicacionFisica" [(ngModel)]="selectedProducto.ubicacionFisica" name="ubicacionFisica" required>
+        </div>
+        <div class="mb-3">
+          <label for="existenciaMinima" class="form-label">Existencia Mínima</label>
+          <input type="number" class="form-control" id="existenciaMinima" [(ngModel)]="selectedProducto.existenciaMinima" name="existenciaMinima" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="updateMessage" class="alert alert-success mt-3">
+    {{ updateMessage }}
+  </div>
+</div>
