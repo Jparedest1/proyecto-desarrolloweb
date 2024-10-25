@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from '../../../cliente/cliente.service';
 import { ProductoService } from '../../../producto/producto.service';
 import { VentaService } from '../../../venta/venta.service'; // Importar el servicio de Ventas
-import { Router } from '@angular/router';
-
+import { DetalleVentaService } from '../../../venta/detalle-venta.service';
 @Component({
   selector: 'app-ventaxmayor',
   templateUrl: './ventaxmayor.component.html',
@@ -23,22 +22,25 @@ export class VentaxMayorComponent implements OnInit {
   errorMessage: string = '';
   isLoading: boolean = false;
   clienteFijado: boolean = false; // Verificar si el cliente ya está fijado
-
+  nuevoIdVenta: number = 0;
+  ultimoIdDetalleVenta: number = 0;
   constructor(
     private fb: FormBuilder,
     private clientService: ClientService,
     private productoService: ProductoService,
     private ventaService: VentaService,
-    private router: Router
+    private detalleVentaService: DetalleVentaService
   ) {
     this.ventaForm = this.fb.group({
       idCliente: ['', Validators.required],
       idProducto: ['', Validators.required],
       fechaVenta: [{ value: '', disabled: true }],
-      tipoVenta: ['', Validators.required],
+      tipoVenta: ['', Validators.required],  // Agregar tipo de venta
+      formaPago: ['', Validators.required],  // Agregar forma de pago
       cantidad: ['', Validators.required],
       precioUnitario: [{ value: '', disabled: true }],
       subtotal: [{ value: '', disabled: true }]
+
     });
   }
 
@@ -46,8 +48,26 @@ export class VentaxMayorComponent implements OnInit {
     this.getAllClients();
     this.getAllProductos();
     this.setFechaActual();
+    this.obtenerUltimoIdVenta();
+    this.obtenerUltimoIdDetalleVenta();
   }
-
+  obtenerUltimoIdVenta(): void {
+    this.ventaService.getUltimoIdVenta().then((nuevoId: number) => {
+      this.nuevoIdVenta = nuevoId;  // Asignar el nuevo ID
+    }).catch(() => {
+      this.errorMessage = 'Error al obtener el último ID de venta';
+    });
+  }
+  obtenerUltimoIdDetalleVenta(): void {
+    this.detalleVentaService.getUltimoIdDetalleVenta()
+      .then((ultimoId: number) => { // Declarar el tipo de la variable como number
+        this.ultimoIdDetalleVenta = ultimoId; // Asignar el último ID obtenido
+      })
+      .catch(() => {
+        this.errorMessage = 'Error al obtener el último ID de detalle de venta';
+      });
+  }
+  
   getAllClients(): void {
     this.clientService.getClients().then((clientes: any[]) => {
       this.clientes = clientes;
@@ -159,28 +179,73 @@ export class VentaxMayorComponent implements OnInit {
     this.productosAgregados.splice(index, 1);
     this.calcularTotalVenta();
   }
-
+  verJSON(): void {
+    // Construir el objeto de venta
+    const ventaData = {
+      idVenta: this.nuevoIdVenta,  // ID de la nueva venta
+      idCliente: this.clienteSeleccionado?.idCliente,
+      fechaVenta: this.ventaForm.get('fechaVenta')?.value,
+      tipoVenta: this.ventaForm.get('tipoVenta')?.value,  // Tipo de venta
+      formaPago: this.ventaForm.get('formaPago')?.value,  // Forma de pago
+      totalVenta: this.totalVenta,
+      detalleVenta: this.productosAgregados.map(producto => ({
+        idProducto: producto.idProducto,
+        cantidad: producto.cantidad,
+        precioUnitario: producto.precioConDescuento,
+        subtotal: producto.subtotal
+      }))
+    };
+  
+    // Mostrar el JSON en la consola
+    console.log('Datos de la venta:', JSON.stringify(ventaData, null, 2));
+  
+    // Mostrar el JSON en un alert para visualización rápida
+    alert('JSON de la venta:\n' + JSON.stringify(ventaData, null, 2));
+  }
   finalizarVenta(): void {
     if (this.productosAgregados.length > 0) {
       const ventaData = {
         idCliente: this.clienteSeleccionado?.idCliente,
         fechaVenta: this.ventaForm.get('fechaVenta')?.value,
         tipoVenta: this.ventaForm.get('tipoVenta')?.value,
+        formaPago: this.ventaForm.get('formaPago')?.value,
         totalVenta: this.totalVenta,
-        detalleVenta: this.productosAgregados.map(producto => ({
-          idProducto: producto.idProducto,
-          cantidad: producto.cantidad,
-          precioUnitario: producto.precioConDescuento,
-          subtotal: producto.subtotal
-        }))
       };
-  
+
       this.ventaService.createVenta(ventaData)
         .then(response => {
+          const idVenta = response.idVenta; // Obtener el ID de la venta creada
+
+          // Guardar el detalle de venta para cada producto
+          let detalleVentaId = this.ultimoIdDetalleVenta; // Iniciar con el último ID obtenido
+          this.productosAgregados.forEach(producto => {
+            detalleVentaId++; // Incrementar el ID para cada detalle de venta
+
+            const detalleVentaData = {
+              idDetalleVenta: detalleVentaId,
+              idVenta: idVenta,
+              idProducto: producto.idProducto,
+              cantidad: producto.cantidad,
+              precioUnitario: producto.precioConDescuento,
+              subtotal: producto.subtotal
+            };
+
+            // Enviar el detalle de venta a la API
+            this.detalleVentaService.createDetalleVenta(detalleVentaData)
+              .then(() => {
+                console.log('Detalle de venta guardado:', detalleVentaData);
+              })
+              .catch(error => {
+                this.errorMessage = 'Error al guardar el detalle de venta: ' + error.message;
+              });
+          });
+
+          // Resetear los datos
           this.successMessage = 'Venta creada exitosamente.';
           this.productosAgregados = [];
           this.totalVenta = 0;
           this.descuento = 0;
+          this.ultimoIdDetalleVenta = detalleVentaId; // Actualizar el último ID para futuras ventas
         })
         .catch(error => {
           this.errorMessage = 'Error al guardar la venta: ' + error.message;
@@ -188,9 +253,5 @@ export class VentaxMayorComponent implements OnInit {
     } else {
       this.errorMessage = 'No hay productos agregados.';
     }
-  }
-  irAPagina(event: Event, url: string) {
-    event.preventDefault(); // Evita que el enlace redirija directamente
-    this.router.navigateByUrl(url); // Navega a la ruta proporcionada
   }
 }

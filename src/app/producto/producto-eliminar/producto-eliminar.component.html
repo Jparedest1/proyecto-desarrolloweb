@@ -42,7 +42,7 @@
           <tr *ngFor="let producto of filteredProductos">
             <td>{{ producto.idProducto }}</td>
             <td>{{ producto.descripcion }}</td>
-            <td>{{ producto.precioUnitario | currency }}</td>
+            <td>{{ producto.precioUnitario | currency:'Q' }}</td>
             <td>{{ producto.idProveedor }}</td>
             <td>{{ producto.fechaVencimiento | date }}</td>
             <td>

@@ -45,7 +45,7 @@
         <td>{{ producto.idProducto }}</td>
         <td>{{ producto.descripcion }}</td>
         <td>{{ producto.idProveedor }}</td>
-        <td>{{ producto.precioUnitario | currency }}</td>
+        <td>{{ producto.precioUnitario | currency:'Q'}}</td>
         <td>{{ producto.fechaVencimiento | date:'yyyy-MM-dd' }}</td>
         <td>{{ producto.ubicacionFisica }}</td>
         <td>{{ producto.existenciaMinima }}</td>

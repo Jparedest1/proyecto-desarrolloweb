@@ -14,3 +14,4 @@ import { VentaxMayorComponent } from './ventaxmayor.component';
   ]
 })
 export class VentaModule { }
+

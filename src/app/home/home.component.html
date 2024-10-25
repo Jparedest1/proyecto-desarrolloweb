@@ -1,155 +1,155 @@
 <div class="d-flex">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="bg-light" [class.active]="sidebarActive">
-      <div class="p-4">
-        <h3 class="mb-4">Bienvenido</h3>
-        <ul class="list-unstyled">
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none text-dark">
-              <i class="bi bi-house me-2"></i> Home
-            </a>
-          </li>
-          <!--CLIENTE-->
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'cliente')">
-              <span><i class="bi bi-people me-2"></i> Cliente</span>
-              <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['cliente'], 'bi-chevron-up': submenuStates['cliente']}"></i>
-            </a>
-            <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['cliente']}">
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/cliente/crear')">
-                  <i class="bi bi-plus-circle me-2"></i>Crear
-                </a>
-              </li>              
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/cliente/consultar')">
-                  <i class="bi bi-search me-2"></i>Consultar
-                </a>
-              </li>
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/cliente/actualizar')">
-                  <i class="bi bi-pencil me-2"></i>Actualizar
-                </a>
-              </li>
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/cliente/eliminar')">
-                  <i class="bi bi-trash me-2"></i>Eliminar
-                </a>
-              </li>
+  <!-- Sidebar -->
+  <nav id="sidebar" class="bg-light" [class.active]="sidebarActive">
+    <div class="p-4">
+      <h3 class="mb-4">Bienvenido</h3>
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <a href="#" class="text-decoration-none text-dark">
+            <i class="bi bi-house me-2"></i> Home
+          </a>
+        </li>
+        <!--CLIENTE-->
+        <li class="mb-2">
+          <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'cliente')">
+            <span><i class="bi bi-people me-2"></i> Cliente</span>
+            <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['cliente'], 'bi-chevron-up': submenuStates['cliente']}"></i>
+          </a>
+          <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['cliente']}">
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/cliente/crear')">
+                <i class="bi bi-plus-circle me-2"></i>Crear
+              </a>
+            </li>              
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/cliente/consultar')">
+                <i class="bi bi-search me-2"></i>Consultar
+              </a>
+            </li>
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/cliente/actualizar')">
+                <i class="bi bi-pencil me-2"></i>Actualizar
+              </a>
+            </li>
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/cliente/eliminar')">
+                <i class="bi bi-trash me-2"></i>Eliminar
+              </a>
+            </li>
 
-            </ul>
-          </li>
-          <!--PROVEEDOR-->
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'proveedor')">
-              <span><i class="bi bi-person-vcard me-2"></i> Proveedor</span>
-              <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['proveedor'], 'bi-chevron-up': submenuStates['proveedor']}"></i>
-            </a>
-            <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['proveedor']}">
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/proveedor/crear')">
-                  <i class="bi bi-plus-circle me-2"></i>Crear
-                </a>
-              </li>
+          </ul>
+        </li>
+        <!--PROVEEDOR-->
+        <li class="mb-2">
+          <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'proveedor')">
+            <span><i class="bi bi-person-vcard me-2"></i> Proveedor</span>
+            <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['proveedor'], 'bi-chevron-up': submenuStates['proveedor']}"></i>
+          </a>
+          <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['proveedor']}">
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/proveedor/crear')">
+                <i class="bi bi-plus-circle me-2"></i>Crear
+              </a>
+            </li>
 
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/proveedor/consultar')">
-                  <i class="bi bi-search me-2"></i>Consultar
-                </a>
-              </li>
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/proveedor/consultar')">
+                <i class="bi bi-search me-2"></i>Consultar
+              </a>
+            </li>
 
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/proveedor/actualizar')">
-                  <i class="bi bi-pencil me-2"></i>Actualizar
-                </a>
-              </li>
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/proveedor/actualizar')">
+                <i class="bi bi-pencil me-2"></i>Actualizar
+              </a>
+            </li>
 
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/proveedor/eliminar')">
-                  <i class="bi bi-trash me-2"></i>Eliminar
-                </a>
-              </li>
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/proveedor/eliminar')">
+                <i class="bi bi-trash me-2"></i>Eliminar
+              </a>
+            </li>
 
-            </ul>
-          </li>
-          <!--PRODUCTO-->
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'producto')">
-              <span><i class="bi bi-basket-fill me-2"></i> Producto</span>
-              <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['producto'], 'bi-chevron-up': submenuStates['producto']}"></i>
-            </a>
-            <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['producto']}">
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/producto/crear')">
-                  <i class="bi bi-plus-circle me-2"></i>Crear
-                </a>
-              </li>
-              
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/producto/consultar')">
-                  <i class="bi bi-search me-2"></i>Consultar
-                </a>
-              </li>
+          </ul>
+        </li>
+        <!--PRODUCTO-->
+        <li class="mb-2">
+          <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'producto')">
+            <span><i class="bi bi-basket-fill me-2"></i> Producto</span>
+            <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['producto'], 'bi-chevron-up': submenuStates['producto']}"></i>
+          </a>
+          <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['producto']}">
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/producto/crear')">
+                <i class="bi bi-plus-circle me-2"></i>Crear
+              </a>
+            </li>
+            
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/producto/consultar')">
+                <i class="bi bi-search me-2"></i>Consultar
+              </a>
+            </li>
 
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/producto/actualizar')">
-                  <i class="bi bi-pencil me-2"></i>Actualizar
-                </a>
-              </li>
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/producto/actualizar')">
+                <i class="bi bi-pencil me-2"></i>Actualizar
+              </a>
+            </li>
 
-              <li>
-                <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/producto/eliminar')">
-                  <i class="bi bi-trash me-2"></i>Eliminar
-                </a>
-              </li>
+            <li>
+              <a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/producto/eliminar')">
+                <i class="bi bi-trash me-2"></i>Eliminar
+              </a>
+            </li>
 
-            </ul>
-          </li>
-          <!--VENTA-->
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'venta')">
-              <span><i class="bi bi-shop me-2"></i> Venta</span>
-              <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['venta'], 'bi-chevron-up': submenuStates['venta']}"></i>
-            </a>
-            <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['venta']}">
-              <li><a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, 'venta/ventaxmayor')">
-              <i class="bi bi-box-seam me-2"></i>Ventas por mayor</a></li>
-              <li><a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, 'venta/ventaxmenor')">
-                <i class="bi bi-bag me-2"></i>Ventas por menor</a></li>
-            </ul>
-          </li>
-          <!--NOTAS DE CREDITO-->
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'notasCredito')">
-              <span><i class="bi bi-card-checklist me-2"></i> Notas de crédito</span>
-              <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['notasCredito'], 'bi-chevron-up': submenuStates['notasCredito']}"></i>
-            </a>
-            <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['notasCredito']}">
-              <li><a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/notascredito/eliminar')">
-              <i class="bi bi-x-circle me-2"></i>Anular ventas</a></li>
-              <li><a href="#" class="text-decoration-none text-dark"><i class="bi bi-arrow-return-left me-2"></i>Devolución de productos</a></li>
-            </ul>
-          </li>
-          <!--ENTREGA-->
-          <li class="mb-2">
-            <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'entrega')">
-              <span><i class="bi bi-send me-2"></i> Entrega</span>
-              <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['entrega'], 'bi-chevron-up': submenuStates['entrega']}"></i>
-            </a>
-            <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['entrega']}">
-              <li><a href="#" class="text-decoration-none text-dark"><i class="bi bi-truck me-2"></i>Ingresar entrega</a></li>
-              <li><a href="#" class="text-decoration-none text-dark"><i class="bi bi-geo-alt me-2"></i>Seguimiento de entregas</a></li>
-              <li><a href="#" class="text-decoration-none text-dark"><i class="bi bi-journal-text me-2"></i>Consultar registros de entrega</a></li>
-            </ul>
-          </li>
+          </ul>
+        </li>
+        <!--VENTA-->
+        <li class="mb-2">
+          <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'venta')">
+            <span><i class="bi bi-shop me-2"></i> Venta</span>
+            <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['venta'], 'bi-chevron-up': submenuStates['venta']}"></i>
+          </a>
+          <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['venta']}">
+            <li><a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, 'venta/ventaxmayor')">
+            <i class="bi bi-box-seam me-2"></i>Ventas por mayor</a></li>
+            <li><a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, 'venta/ventaxmenor')">
+              <i class="bi bi-bag me-2"></i>Ventas por menor</a></li>
+          </ul>
+        </li>
+        <!--NOTAS DE CREDITO-->
+        <li class="mb-2">
+          <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'notasCredito')">
+            <span><i class="bi bi-card-checklist me-2"></i> Notas de crédito</span>
+            <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['notasCredito'], 'bi-chevron-up': submenuStates['notasCredito']}"></i>
+          </a>
+          <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['notasCredito']}">
+            <li><a href="#" class="text-decoration-none text-dark" (click)="irAPagina($event, '/notascredito/eliminar')">
+            <i class="bi bi-x-circle me-2"></i>Anular ventas</a></li>
+            <li><a href="#" class="text-decoration-none text-dark"><i class="bi bi-arrow-return-left me-2"></i>Devolución de productos</a></li>
+          </ul>
+        </li>
+        <!--ENTREGA-->
+        <li class="mb-2">
+          <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center" (click)="toggleSubmenu($event, 'entrega')">
+            <span><i class="bi bi-send me-2"></i> Entrega</span>
+            <i class="bi" [ngClass]="{'bi-chevron-down': !submenuStates['entrega'], 'bi-chevron-up': submenuStates['entrega']}"></i>
+          </a>
+          <ul class="list-unstyled ms-3 mt-2" [ngClass]="{'d-none': !submenuStates['entrega']}">
+            <li><a href="#" class="text-decoration-none text-dark"><i class="bi bi-truck me-2"></i>Ingresar entrega</a></li>
+            <li><a href="#" class="text-decoration-none text-dark"><i class="bi bi-geo-alt me-2"></i>Seguimiento de entregas</a></li>
+            <li><a href="#" class="text-decoration-none text-dark"><i class="bi bi-journal-text me-2"></i>Consultar registros de entrega</a></li>
+          </ul>
+        </li>
 
-        </ul>
-      </div>
-    </nav>
-  
-    <!-- MOVIMIENTO SIDEBAR -->
-    <div id="overlay" [style.display]="sidebarActive ? 'block' : 'none'" (click)="toggleSidebar()"></div>
-  
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MOVIMIENTO SIDEBAR -->
+  <div id="overlay" [style.display]="sidebarActive ? 'block' : 'none'" (click)="toggleSidebar()"></div>
+
     <!-- CONTENIDO DE LA PAGINA -->
     <div id="content" class="w-100" [class.sidebar-active]="sidebarActive">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -175,4 +175,3 @@
         </div>
       </div>
     </div>
-  </div>
